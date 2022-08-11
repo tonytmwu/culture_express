@@ -7,10 +7,10 @@ class PosterView extends StatefulWidget {
   String? caption;
   String? city;
   String? venue;
-  String? startData;
+  String? startDate;
   String? endDate;
 
-  PosterView({Key? key, this.img, this.caption, this.city, this. venue, this.startData, this.endDate}) : super(key: key);
+  PosterView({Key? key, this.img, this.caption, this.city, this. venue, this.startDate, this.endDate}) : super(key: key);
 
   @override
   State<PosterView> createState() => _PosterViewState();
@@ -81,7 +81,7 @@ class _PosterViewState extends State<PosterView> {
 
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: Text("${widget.startData ?? ""} ~ ${widget.endDate ?? ""}", style: const TextStyle(fontSize: 18, color: Colors.black),),
+                    child: Text("${widget.startDate ?? ""} ~ ${widget.endDate ?? ""}", style: const TextStyle(fontSize: 18, color: Colors.black),),
                   ),
                 ],
               ),

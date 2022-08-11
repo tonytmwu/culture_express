@@ -63,7 +63,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
                       caption: activity?.caption,
                       city: activity?.city,
                       venue: activity?.venue,
-                      startData: activity?.startDate,
+                      startDate: activity?.startDate,
                       endDate: activity?.endDate,
                     ),
                   );

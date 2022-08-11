@@ -43,7 +43,7 @@ class ActivityRepo {
 
   Future<Activity?> queryActivityById(String id) async {
     List<Map> list = await SqlHelper.db.query("activity",
-        columns: ["Caption", "Company", "StartDate", "EndDate", "Introduction", "ImageFile", "Venue", "Introduction"],
+        columns: ["Caption", "Company", "StartDate", "EndDate", "Introduction", "ImageFile", "Venue", "Introduction", "YoutubeLink"],
         where: 'ID = ?',
         whereArgs: [id]);
 
