@@ -8,6 +8,7 @@ class Activity {
   String? imageFile;
   String? introduction;
   String? youtubeLink;
+  String? websiteLink;
 
   Activity(
       {this.id,
@@ -18,7 +19,8 @@ class Activity {
       this.endDate,
       this.imageFile,
       this.introduction,
-      this.youtubeLink});
+      this.youtubeLink,
+      this.websiteLink});
 
   factory Activity.fromJson(Map<String, dynamic> json) => Activity(
       id: json["ID"] as String?,
@@ -29,5 +31,6 @@ class Activity {
       endDate: json["EndDate"] as String?,
       imageFile: json["ImageFile"] as String?,
       introduction: json["Introduction"] as String?,
-      youtubeLink: json["YoutubeLink"] as String?);
+      youtubeLink: json["YoutubeLink"] as String?,
+      websiteLink: json["WebsiteLink"] as String?);
 }

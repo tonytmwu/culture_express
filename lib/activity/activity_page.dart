@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:culture_express/activity/bloc/activity_bloc.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ActivityPage extends StatefulWidget {
@@ -94,6 +96,12 @@ class _ActivityPageState extends State<ActivityPage> {
     _controller.dispose();
   }
 
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -110,7 +118,7 @@ class _ActivityPageState extends State<ActivityPage> {
             return YoutubePlayerBuilder(
               player: _player,
 
-              builder: (BuildContext , Widget ) => Scaffold(
+              builder: (BuildContext , Widget) => Scaffold(
                 appBar: AppBar(
                     title: const Text("活動詳情"),
                     centerTitle: true,
@@ -150,7 +158,8 @@ class _ActivityPageState extends State<ActivityPage> {
 
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: Text("${state.activity?.city ?? ""} / ${state.activity?.venue ?? ""}", style: const TextStyle(fontSize: 18, color: Colors.black,),),
+                          child: Text( (state.activity?.city?.isNotEmpty == true) ? "${state.activity?.city ?? ""} / ${state.activity?.venue ?? ""}" : state.activity?.venue ?? "",
+                            style: const TextStyle(fontSize: 18, color: Colors.black,),),
                         ),
 
                         const SizedBox(height: 5,),
@@ -161,6 +170,25 @@ class _ActivityPageState extends State<ActivityPage> {
                         ),
 
                         const SizedBox(height: 5,),
+
+                        Visibility(
+                          visible: state.activity?.websiteLink?.isNotEmpty == true,
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                width: MediaQuery.of(context).size.width,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _launchUrl(state.activity!.websiteLink!);
+                                  },
+                                  child: Text(state.activity?.websiteLink ?? "" , style: const TextStyle(fontSize: 18, color: Colors.blue),),
+                                ),
+                              ),
+
+                              const SizedBox(height: 5,),
+                            ],
+                          )),
 
                         Visibility(
                           visible: state.activity?.imageFile?.isNotEmpty == true,

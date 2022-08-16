@@ -73,7 +73,8 @@ class _PosterViewState extends State<PosterView> {
 
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: Text("${widget.city ?? ""} / ${widget.venue ?? ""}", style: const TextStyle(fontSize: 18, color: Colors.black,),),
+                    child: Text((widget.city?.isNotEmpty == true) ? "${widget.city ?? ""} / ${widget.venue ?? ""}" : widget.venue ?? "",
+                      style: const TextStyle(fontSize: 18, color: Colors.black,),),
                   ),
 
 

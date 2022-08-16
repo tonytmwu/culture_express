@@ -43,7 +43,7 @@ class ActivityRepo {
 
   Future<Activity?> queryActivityById(String id) async {
     List<Map> list = await SqlHelper.db.query("activity",
-        columns: ["Caption", "Company", "StartDate", "EndDate", "Introduction", "ImageFile", "Venue", "Introduction", "YoutubeLink"],
+        columns: ["Caption", "City", "Company", "StartDate", "EndDate", "Introduction", "ImageFile", "Venue", "Introduction", "YoutubeLink", "WebsiteLink"],
         where: 'ID = ?',
         whereArgs: [id]);
 
@@ -53,5 +53,34 @@ class ActivityRepo {
       activity = Activity.fromJson(json);
     }
     return activity;
+  }
+
+  Future<List<String>> queryCities() async {
+    List<Map<String, dynamic>> list = await SqlHelper.db.rawQuery("SELECT DISTINCT City FROM activity");
+    debugPrint(list.toString());
+    List<String> cities = ["全部"];
+    if(list.isNotEmpty) {
+      for (Map<String, dynamic> element in list) {
+        String? city = element["City"];
+        if(city?.isNotEmpty == true) {
+          cities.add(city!);
+        }
+      }
+    }
+    return cities;
+  }
+
+  Future<List<Activity>> queryActivityByCity(String city) async {
+    List<Map> list = await SqlHelper.db.query("activity",
+        columns: ["ID", "Caption", "City", "Company", "StartDate", "EndDate", "Introduction", "ImageFile", "Venue", "Introduction", "YoutubeLink", "WebsiteLink"],
+        where: 'City = ?',
+        whereArgs: [city]);
+
+    List<Activity> activities = [];
+    for (var item in list) {
+      final json = item as Map<String, dynamic>;
+      activities.add(Activity.fromJson(json));
+    }
+    return activities;
   }
 }

@@ -9,7 +9,13 @@ abstract class BulletinBoardState extends Equatable {
   List<Object?> get props => [activities];
 }
 
-class BulletinBoardInitial extends BulletinBoardState {}
+class BulletinBoardInitial extends BulletinBoardState {
+
+  List<String>? cities;
+
+  BulletinBoardInitial({this.cities});
+
+}
 
 class ShowActivities extends BulletinBoardState {
 
