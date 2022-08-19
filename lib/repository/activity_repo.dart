@@ -41,6 +41,23 @@ class ActivityRepo {
     return activities;
   }
 
+  Future<List<Activity>> queryAllFromAPI() async {
+    final response = await httpService.request(HttpMethod.get, path: "OpenData/Event/C000003");
+    final list = response?.data as List<dynamic>?;
+
+    print("list -> ${list}");
+
+    List<Activity> activities = [];
+    if(list != null) {
+      for (var item in list) {
+        final json = item as Map<String, dynamic>;
+        activities.add(Activity.fromJson(json));
+      }
+    }
+    return activities;
+  }
+
+
   Future<Activity?> queryActivityById(String id) async {
     List<Map> list = await SqlHelper.db.query("activity",
         columns: ["Caption", "City", "Company", "StartDate", "EndDate", "Introduction", "ImageFile", "Venue", "Introduction", "YoutubeLink", "WebsiteLink"],

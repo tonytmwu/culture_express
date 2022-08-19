@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:culture_express/model/activity.dart';
 import 'package:culture_express/repository/activity_repo.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 part 'bulletin_board_event.dart';
@@ -18,8 +19,17 @@ class BulletinBoardBloc extends Bloc<BulletinBoardEvent, BulletinBoardState> {
   }
 
   _processBulletinBoardInitial(event, emit) async {
-    final cities = await activityRepo.queryCities();
-    emit(BulletinBoardInitial(cities: cities));
+    if(!kIsWeb) {
+      var cities = await activityRepo.queryCities();
+      if(cities.isNotEmpty) {
+        activityRepo.fetchActivityList();
+      } else {
+        await activityRepo.fetchActivityList();
+      }
+      cities = await activityRepo.queryCities();
+      emit(BulletinBoardInitial(cities: cities));
+    }
+    add(QueryAllActivitiesEvent());
   }
 
   _processActivitiesEvent(event, emit) async {
@@ -35,7 +45,12 @@ class BulletinBoardBloc extends Bloc<BulletinBoardEvent, BulletinBoardState> {
         emit(ShowActivities(activities: activities));
         break;
       default:
-        final activities = await activityRepo.queryAll();
+        var activities;
+        if(kIsWeb) {
+          activities = await activityRepo.queryAllFromAPI();
+        } else {
+          activities = await activityRepo.queryAll();
+        }
         emit(ShowActivities(activities: activities));
         break;
     }

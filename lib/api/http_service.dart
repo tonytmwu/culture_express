@@ -12,8 +12,8 @@ class HttpService {
   HttpService({required String host})  {
     _dio = Dio(BaseOptions(
         baseUrl: host,
-        connectTimeout: 10000,
-        receiveTimeout: 10000
+        connectTimeout: 20000,
+        receiveTimeout: 20000
     ));
 
     initializeInterceptors();
@@ -27,6 +27,9 @@ class HttpService {
   }) async {
     Response? response;
     try{
+
+      headers ??= {"Accept": "application/json", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Access-Control-Allow-Origin, Accept"};
+
       switch (method) {
         case HttpMethod.get:
           response = await _dio.get(path, queryParameters: params, options: Options(

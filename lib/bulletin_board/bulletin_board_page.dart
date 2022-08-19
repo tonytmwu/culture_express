@@ -19,7 +19,6 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
 
   _onLayoutDone(_) {
     _bloc.add(InitBulletinBoardEvent());
-    _bloc.add(QueryAllActivitiesEvent());
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:culture_express/bulletin_board/bulletin_board_page.dart';
 import 'package:culture_express/db/SqlHelper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'SimpleBlocObserver.dart';
@@ -8,7 +9,9 @@ import 'SimpleBlocObserver.dart';
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  await _initDB();
+  if(!kIsWeb) {
+    await _initDB();
+  }
 
   BlocOverrides.runZoned(
         () {
