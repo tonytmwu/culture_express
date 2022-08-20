@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.culture_express">
+    package="com.net.cultureexpress">
    <application
         android:label="culture_express"
         android:name="${applicationName}"
