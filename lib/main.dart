@@ -3,8 +3,10 @@ import 'package:culture_express/bulletin_board/bulletin_board_page.dart';
 import 'package:culture_express/db/SqlHelper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'SimpleBlocObserver.dart';
+import 'style/primary_theme.dart';
 
 void main() async {
 
@@ -34,7 +36,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: PrimaryTheme.primaryBlue,
+          appBarTheme: const AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarBrightness: Brightness.light,
+                statusBarIconBrightness: Brightness.light,)),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );

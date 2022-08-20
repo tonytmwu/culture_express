@@ -46,7 +46,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
             }
             return Scaffold(
               appBar: AppBar(
-                title: const Text("文化快訊"),
+                title: const Text("文化快訊", style: TextStyle(color: Colors.white),),
                 centerTitle: true,
               ),
               body: Column(
@@ -59,6 +59,7 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: cities?.length ?? 0,
+                      padding: const EdgeInsets.only(left: 5, right: 5),
                       separatorBuilder: (context, index) => const SizedBox(width: 10,),
                       itemBuilder: (BuildContext context, int index) {
                         return _createCityText(cities?[index] ?? "", () {
