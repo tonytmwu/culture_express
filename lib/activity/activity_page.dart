@@ -120,13 +120,13 @@ class _ActivityPageState extends State<ActivityPage> {
 
               builder: (BuildContext , Widget) => Scaffold(
                 appBar: AppBar(
-                    title: const Text("活動詳情"),
+                    title: const Text("活動詳情", style: TextStyle(color: Colors.white),),
                     centerTitle: true,
                     leading: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Icon(Icons.arrow_back_ios_new,),
+                      child: const Icon(Icons.arrow_back_ios_new, color: Colors.white,),
                     )
                 ),
                 body: ListView(
