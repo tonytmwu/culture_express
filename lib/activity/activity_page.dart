@@ -111,9 +111,6 @@ class _ActivityPageState extends State<ActivityPage> {
         listener: (BuildContext context, state) {  },
         child: BlocBuilder<ActivityBloc, ActivityState>(
           builder: (BuildContext context, state) {
-
-            debugPrint("youtubeLink -> ${state.activity?.youtubeLink}");
-
             _player = initPlayer(state.activity?.youtubeLink);
             return YoutubePlayerBuilder(
               player: _player,
