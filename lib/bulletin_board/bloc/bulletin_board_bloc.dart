@@ -21,7 +21,7 @@ class BulletinBoardBloc extends Bloc<BulletinBoardEvent, BulletinBoardState> {
   _processBulletinBoardInitial(event, emit) async {
     if(!kIsWeb) {
       var cities = await activityRepo.queryCities();
-      if(cities.isNotEmpty) {
+      if(cities.length > 1) {
         activityRepo.fetchActivityList();
       } else {
         await activityRepo.fetchActivityList();

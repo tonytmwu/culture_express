@@ -61,7 +61,7 @@ class _PosterViewState extends State<PosterView> {
 
             Container(
               alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 5, right: 5),
+              padding: const EdgeInsets.only(left: 5, right: 5, bottom: 3),
               child: Column(
                 children: <Widget>[
                   SizedBox(

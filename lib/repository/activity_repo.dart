@@ -44,9 +44,6 @@ class ActivityRepo {
   Future<List<Activity>> queryAllFromAPI() async {
     final response = await httpService.request(HttpMethod.get, path: "OpenData/Event/C000003");
     final list = response?.data as List<dynamic>?;
-
-    print("list -> ${list}");
-
     List<Activity> activities = [];
     if(list != null) {
       for (var item in list) {
